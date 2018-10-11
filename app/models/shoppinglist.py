@@ -1,4 +1,4 @@
-from lib.basemodel import BaseModel as db
+from app.models.basemodel import BaseModel as db
 from datetime import datetime
 from app.models.user import User
 
