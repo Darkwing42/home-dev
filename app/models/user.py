@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime
 from app.models.shoppinglist import ShoppingList
+from app.models.preferences import Preferences
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -12,8 +13,9 @@ class User(db.Model):
     email = db.Column(db.String(120))
 
     
-    
+    preferences = db.relationship('Preferences', backref='User', lazy=True)
     shoppingLists = db.relationship('ShoppingList', backref='User', lazy=False)
+	
     
     def hash_password(self):
         pass
