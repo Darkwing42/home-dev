@@ -1,4 +1,4 @@
-from lib.basemodel import BaseModel as db
+from app import db
 from datetime import datetime
 from app.models.shoppinglist import ShoppingList
 
