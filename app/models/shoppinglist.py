@@ -1,8 +1,9 @@
-from app.models.basemodel import BaseModel as db
+#from app.models.basemodel import BaseModel as db
+from app import db
 from datetime import datetime
 from app.models.user import User
 
-class ShoppingList(db):
+class ShoppingList(db.Model):
     __tablename__ = 'shoppinglists'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +13,11 @@ class ShoppingList(db):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     done = db.Column(db.Boolean, default=False)
     items = db.relationship('Item', backref='ShoppingList', lazy=False)
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+       
 
 
     def to_dict(self):
@@ -28,7 +34,7 @@ class ShoppingList(db):
 
 
 
-class Item(db):
+class Item(db.Model):
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
