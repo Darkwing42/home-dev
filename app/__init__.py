@@ -15,6 +15,12 @@ def create_app(config_name):
     db.init_app(app)
 
     #Import for resources
-
+    from app.resources.shoppinglist import ShoppingLists, ShoppingList
+      
+    api.add_resource(ShoppingLists, '/api/v1/shoppinglists')
+    api.add_resource(ShoppingList, '/api/v1/shoppinglist/<int:id>
+    
+    
+                 
 
     return app
