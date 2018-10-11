@@ -45,3 +45,4 @@ class User(db):
 	def get_by_id(cls, id):
 		return cls.query.find_by(id=id).first()
 	
+	
