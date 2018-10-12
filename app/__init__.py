@@ -18,7 +18,7 @@ def create_app(config_name):
     from app.resources.shoppinglist import ShoppingLists, ShoppingList
       
     api.add_resource(ShoppingLists, '/api/v1/shoppinglists')
-    api.add_resource(ShoppingList, '/api/v1/shoppinglist/<int:id>
+    api.add_resource(ShoppingList, '/api/v1/shoppinglist' ,'/api/v1/shoppinglist/<int:id>')
     
     
                  
