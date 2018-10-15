@@ -12,7 +12,7 @@ class Item(db.Model):
 	date_created = db.Column(db.DateTime, default=datetime.now)
 	date_modified = db.Column(db.DateTime, default=datetime.now)
 	done = db.Column(db.Boolean, default=False)
-	shopList = db.Column(db.Integer, db.ForeignKey('shoppinglists.id'))
+	shopList_id = db.Column(db.Integer, db.ForeignKey('shoppinglists.id'))
 
 	def save(self):
 		db.session.add(self)
