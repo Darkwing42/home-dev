@@ -8,4 +8,3 @@ class Preferences(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	weather_api_key = db.Column(db.String(50))
 	
-	
