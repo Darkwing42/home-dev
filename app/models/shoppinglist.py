@@ -1,34 +1,35 @@
 #from app.models.basemodel import BaseModel as db
 from app import db
 from datetime import datetime
-from app.models.user import User
+#from app.models.user import User
 
 class Item(db.Model):
 	__tablename__ = 'items'
-	
+
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(120), nullable=False)
 	quantity = db.Column(db.Integer, nullable=False)
 	date_created = db.Column(db.DateTime, default=datetime.now)
-	date_modified = db.Column(db.DateTime, default=datetime.now, onchange=datetime.now)
+	date_modified = db.Column(db.DateTime, default=datetime.now)
 	done = db.Column(db.Boolean, default=False)
-	
+	shopList = db.Column(db.Integer, db.ForeignKey('shoppinglists.id'))
+
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
-	
+
 	def delete(self):
 		db.session.delete(self)
 		db.session.commit()
-		
+
 	@classmethod
 	def get_all(cls):
 		return cls.query.all()
-	
+
 	@classmethod
 	def get_by_id(cls, id):
 		return cls.query.filter_by(id=id).first()
-	
+
 	def to_dict(self):
 		return dict(
 				id=self.id,
@@ -43,13 +44,13 @@ class ShoppingList(db.Model):
 	__tablename__ = 'shoppinglists'
 
 	id = db.Column(db.Integer, primary_key=True)
-	title = db.Column(db.String(120, nullable=False))
+	title = db.Column(db.String(120), nullable=False)
 	date_created = db.Column(db.DateTime, default=datetime.now)
-	date_modified = db.Column(db.DateTime, default=datetime.now, onchange=datetime.now)
+	date_modified = db.Column(db.DateTime, default=datetime.now)
 	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 	done = db.Column(db.Boolean, default=False)
-	items = db.relationshiip('Item', backref='ShoppingList', lazy=False)
-	
+	items = db.relationship('Item', backref='ShoppingList', lazy=False)
+
 	def to_dict(self):
 		return dict(
 			id=self.id,
@@ -59,24 +60,19 @@ class ShoppingList(db.Model):
 			done=self.done,
 			items=[item.to_dict() for item in self.items ]
 		)
-	
+
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
-		
+
 	def delete(self):
 		db.session.delete(self)
 		db.session.commit()
-		
+
 	@classmethod
 	def get_all(cls):
 		return cls.query.all()
-	
+
 	@classmethod
 	def get_by_id(cls, id):
-		return cls.query.filter_by(id=id).first.()
-
-
-
-
-
+		return cls.query.filter_by(id=id).first()

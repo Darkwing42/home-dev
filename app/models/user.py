@@ -1,6 +1,6 @@
 from app import db
 from datetime import datetime
-from app.models.shoppinglist import ShoppingList
+#from app.models.shoppinglist import ShoppingList
 from app.models.preferences import Preferences
 
 class User(db.Model):

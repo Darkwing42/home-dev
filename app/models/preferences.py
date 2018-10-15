@@ -1,5 +1,5 @@
 from app import db
-from app.models.user import User
+#from app.models.user import User
 
 class Preferences(db.Model):
 	__tablename__ = 'preferences'
