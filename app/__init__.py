@@ -14,12 +14,8 @@ def create_app(config_name):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
-    #Import for resources
-    from app.resources.shoppinglist import ShoppingLists, ShoppingList
-
-    #api.add_resource(ShoppingLists, '/api/v1/shoppinglists')
-    api.add_resource(ShoppingList, '/api/v1/shoppinglist', '/api/v1/shoppinglist/<int:id>')
-
+    from app.resources.todo import TodoList
+    api.add_resource(TodoList, '/api/v1/todolist', '/api/v1/todolist/<int:id>')
 
 
     return app
